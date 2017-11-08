@@ -11,4 +11,6 @@ def High(data, period):
     data = pd.DataFrame(data)
     High_Sub = pd.Series((data.rolling(period).min()['High'] - data['Open']).shift(1), name='High-Sub-' + str(period))
     High_Value = pd.Series(data.rolling(period).min()['High'].shift(1), name='High-Value-' + str(period))
-    return High_Sub,High_Value
+    data=data.join(High_Sub)
+    data=data.join(High_Value)
+    return data

@@ -12,8 +12,10 @@ def BB(data, period, shift):
     MA = pd.Series(data.rolling(period).mean()['Close'])
     SD = pd.Series(data.rolling(period).std()['Close'])
     b1 = MA + (2 * SD)
-    B1 = pd.Series(b1, name='UP BB-' + str(period) + '-' + 'Shift' + str(shift)).shift(1 + shift)
+    B1 = pd.Series(b1, name='UP BB-' + str(period) + '-Shift-' + str(shift)).shift(1 + shift)
 
     b2 = MA - (2 * SD)
-    B2 = pd.Series(b2, name='DOWN BB-' + str(period) + '-' + 'Shift' + str(shift)).shift(1 + shift)
-    return B1, B2
+    B2 = pd.Series(b2, name='DOWN BB-' + str(period) + '-Shift-' + str(shift)).shift(1 + shift)
+    data=data.join(B1)
+    data=data.join(B2)
+    return data

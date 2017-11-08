@@ -13,5 +13,6 @@ def Average_Movement(data, period, shift, point):
     data = pd.DataFrame(data)
     move = (data['Close'] - data['Open']) / point
     AM = pd.Series(move.rolling(period).mean().shift(shift),
-                   name='Average_Movement' + str(period) + '-Shift-' + str(shift))
-    return AM
+                   name='Average_Movement-' + str(period) + '-Shift-' + str(shift))
+    data=data.join(AM)
+    return data

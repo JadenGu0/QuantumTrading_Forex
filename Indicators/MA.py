@@ -12,4 +12,5 @@ def MA(data, period, shift):
     data = pd.DataFrame(data)
     MA = pd.Series(data.rolling(period).mean()['Close'].shift(1 + shift),
                    name='MA-' + str(period) + '-Shift-' + str(shift))
-    return MA
+    data=data.join(MA)
+    return data
