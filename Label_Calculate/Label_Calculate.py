@@ -25,7 +25,7 @@ def Label_Calculate(data=None, period=10, point=0.00001, profit=200, stoploss=20
             openprice = data['Open'][i]
             if (high_back - openprice) >= profit * point and (openprice - low_back) < stoploss * point:
                 label = 1
-            if (openprice - low_back) >= profit * point and (high_back - openprice) <= stoploss * point:
+            if (openprice - low_back) >= profit * point and (high_back - openprice) < stoploss * point:
                 label = -1
             res.append(label)
     res = pd.Series(res, name='Label')
